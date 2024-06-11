@@ -7,6 +7,7 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
+
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -20,12 +21,13 @@
 
     {{ content_for_header }}
     {{ 'theme.css' | asset_url |   stylesheet_tag }}
-  </head>
-
-  <body >
-    {% section 'header' %}
-    <main id="MainContent" class="container mx-auto" role="main">
-      {{ content_for_layout }}
-    </main>
+    </head>
+    
+    <body >
+      {% section 'header' %}
+      <main id="MainContent" class="container mx-auto" role="main">
+        {{ content_for_layout }}
+      </main>
+      {{ 'header.js' | asset_url | script_tag }}
   </body>
 </html>
