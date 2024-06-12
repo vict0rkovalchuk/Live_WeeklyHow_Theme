@@ -8,14 +8,19 @@
         {{ section.settings.hero_text }}
       </p>
       <div class="mb-4 space-x-0 md:space-x-2 md:mb-8">
-        <a href="{{ section.settings.hero_primary_button_url }}" class="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-green-400 rounded-2xl sm:w-auto sm:mb-0">
-          {{ section.settings.hero_primary_button_text }}
-          {% render 'icon-arrow-right' %}
-        </a>
-        <a href="{{ section.settings.hero_secondary_button_url }}" class="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg bg-gray-100 rounded-2xl sm:w-auto sm:mb-0">
-          {{ section.settings.hero_secondary_button_text }}
-          {% render 'icon-light-bulb' %}
-        </a>
+        {% if section.settings.hero_primary_button_text and section.settings.hero_primary_button_url %}
+          <a href="{{ section.settings.hero_primary_button_url }}" class="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-green-400 rounded-2xl sm:w-auto sm:mb-0">
+            {{ section.settings.hero_primary_button_text }}
+            {% render 'icon-arrow-right' %}
+          </a>
+        {% endif %}
+
+        {% if section.settings.hero_secondary_button_text and section.settings.hero_secondary_button_url %}
+          <a href="{{ section.settings.hero_secondary_button_url }}" class="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg bg-gray-100 rounded-2xl sm:w-auto sm:mb-0">
+            {{ section.settings.hero_secondary_button_text }}
+            {% render 'icon-light-bulb' %}
+          </a>
+        {% endif %}
       </div>
     </div>
     <div class="w-full mx-auto mt-20 text-center md:w-10/12">
