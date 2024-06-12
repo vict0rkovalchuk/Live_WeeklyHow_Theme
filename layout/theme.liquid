@@ -18,11 +18,17 @@
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
 
+    <style>
+      body {
+        background-color: {{ settings.background }}
+      }
+    </style>
+
     {{ content_for_header }}
     {{ 'theme.css' | asset_url |   stylesheet_tag }}
     </head>
     
-    <body >
+    <body>
       {% section 'header' %}
       <main id="MainContent" class="container mx-auto" role="main">
         {{ content_for_layout }}

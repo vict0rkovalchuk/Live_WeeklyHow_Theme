@@ -6,5 +6,16 @@
     "theme_author": "Vitya",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "Basic settings",
+    "settings": [
+      {
+        "type": "color_background",
+        "id": "background",
+        "label": "Background",
+        "default": "#fff"
+      }
+    ]
   }
 ]
