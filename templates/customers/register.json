@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "main-register"
+      "type": "template-register"
     }
   },
   "order": [
