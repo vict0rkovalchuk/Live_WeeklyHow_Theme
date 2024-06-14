@@ -106,7 +106,10 @@
     </div>
 
     <div class="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-x-4">
-      {% if shop.customer_accounts_enabled %}
+      {% if shop.customer_accounts_enabled and customer %}
+        <a href="{{ routes.account_url }}" class="text-sm font-semibold leading-6 text-gray-900">Account</a>
+        <a href="{{ routes.account_logout_url }}" class="text-sm font-semibold text-white bg-gray-700 hover:bg-gray-900 px-4 py-2 rounded">Logout</a>
+      {% else %}
         <a href="{{ routes.account_login_url }}" class="text-sm font-semibold leading-6 text-gray-900">Log in</a>
         <a href="{{ routes.account_register_url }}" class="text-sm font-semibold text-white bg-gray-700 hover:bg-gray-900 px-4 py-2 rounded">Sign up</a>
       {% endif %}
