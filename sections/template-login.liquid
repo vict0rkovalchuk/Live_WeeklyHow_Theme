@@ -1,7 +1,8 @@
 <div class="my-10">
   <h1 class="text-xl font-bold my-5 text-center">Customer Login</h1>
   {% form 'customer_login'
-    , return_to: routes.all_products_collection_url
+    , novalidate: 'novalidate'
+    , return_to: routes.account_url
     , class: 'flex flex-col gap-y-5' %}
     {% if form.errors %}
       <div class="w-1/2 px-4 py-2 m-auto bg-red-500 font-medium rounded">

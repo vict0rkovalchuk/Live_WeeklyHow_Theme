@@ -181,7 +181,13 @@
               {% endif %}
             {% endfor %}
           </div>
-          {% if shop.customer_accounts_enabled %}
+
+          {% if shop.customer_accounts_enabled and customer %}
+            <div class="py-6">
+              <a href="{{ routes.account_url }}" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Account</a>
+              <a href="{{ routes.account_logout_url }}" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Logout</a>
+            </div>
+          {% else %}
             <div class="py-6">
               <a href="{{ routes.account_login_url }}" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>
               <a href="{{ routes.account_register_url }}" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Sign up</a>
