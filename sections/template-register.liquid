@@ -1,0 +1,57 @@
+<div class="my-10">
+  <h1 class="text-xl font-bold my-5 text-center">Create Account</h1>
+  {% form 'create_customer'
+    , novalidate: novalidate
+    , class: 'flex flex-col gap-y-5' %}
+    {% if form.errors %}
+      <div class="w-1/2 px-4 py-2 m-auto bg-red-500 font-medium rounded">
+        <span>{{ form.errors | default_errors }}</span>
+      </div>
+    {% endif %}
+
+    <div class="flex flex-col gap-y-2 justify-start">
+      <label for="firstName">First name</label>
+      <input
+        id="firstName"
+        type="text"
+        name="customer[first_name]"
+        placeholder="Please enter your first name"
+        class="p-4 border-2 border-green-500 rounded ">
+    </div>
+
+    <div class="flex flex-col gap-y-2 justify-start">
+      <label for="lastName">Last name</label>
+      <input
+        id="lastName"
+        type="text"
+        name="customer[last_name]"
+        placeholder="Please enter your last name"
+        class="p-4 border-2 border-green-500 rounded ">
+    </div>
+
+    <div class="flex flex-col gap-y-2 justify-start">
+      <label for="email">Email address</label>
+      <input
+        id="email"
+        type="email"
+        name="customer[email]"
+        placeholder="Please enter your email address"
+        class="p-4 border-2 border-green-500 rounded ">
+    </div>
+
+    <div class="flex flex-col gap-y-2 justify-start">
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        name="customer[password]"
+        placeholder="Please enter your password"
+        class="p-4 border-2 border-green-500 rounded ">
+    </div>
+
+    <input
+      type="submit"
+      value="Sign up"
+      class="bg-green-700 hover:bg-green-900 font-medium text-white py-3 px-5 rounded cursor-pointer">
+  {% endform %}
+</div>
