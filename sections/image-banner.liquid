@@ -1,0 +1,100 @@
+<div class="text-gray-800 mt-10">
+  {% if section.settings.show_image %}
+    {% case section.settings.desktop_image_position %}
+      {% when 'left' %}
+        {% assign desktop_flex_direction = 'lg:flex-row' %}
+      {% when 'right' %}
+        {% assign desktop_flex_direction = 'lg:flex-row-reverse' %}
+    {% endcase %}
+
+    {% case section.settings.mobile_image_position %}
+      {% when 'top' %}
+        {% assign mobile_flex_direction = 'flex-col' %}
+      {% when 'bottom' %}
+        {% assign mobile_flex_direction = 'flex-col-reverse' %}
+    {% endcase %}
+  {% endif %}
+
+  <div class="container flex {% if section.settings.show_image %} {{ mobile_flex_direction }} {{ desktop_flex_direction }} {% endif %} justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:justify-between">
+    {% if section.settings.show_image %}
+      <div class="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
+        {% if section.settings.image %}
+          {{ section.settings.image | image_url: width: 1000 | image_tag: class: 'object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128', loading: 'lazy' }}
+        {% else %}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128' }}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="flex flex-col justify-center p-6 text-center rounded-sm {% if section.settings.show_image %} lg:max-w-md xl:max-w-lg {% else %} w-full {% endif %} lg:text-left">
+      <h1 class="text-5xl font-bold leading-none sm:text-6xl">Ac mattis
+        <span class="text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-400 to-purple-500">senectus</span>erat pharetra
+      </h1>
+      <p class="mt-6 mb-8 text-lg sm:mb-12">Dictum aliquam porta in condimentum ac integer
+        <br class="hidden md:inline lg:hidden">turpis pulvinar, est scelerisque ligula sem
+      </p>
+      <div class="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
+        <a
+          rel="noopener noreferrer"
+          href="#"
+          class="px-8 py-3 text-lg font-semibold rounded bg-green-600 text-gray-50">Suspendisse</a>
+        <a
+          rel="noopener noreferrer"
+          href="#"
+          class="px-8 py-3 text-lg font-semibold border rounded border-gray-800">Malesuada</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Image Banner",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_image",
+        "label": "Show image",
+        "default": true
+      }, {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      }, {
+        "type": "select",
+        "id": "desktop_image_position",
+        "label": "Image position on desktop devices",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left"
+      }, {
+        "type": "select",
+        "id": "mobile_image_position",
+        "label": "Image position on mobile devices",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          }, {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "default": "top"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image Banner"
+      }
+    ]
+  }
+{% endschema %}
