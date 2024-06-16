@@ -1,8 +1,53 @@
-<div class="grid grid-cols-3 gap-4 my-10">
-  {% paginate collection.products by 10 %}
-    {% for product in collection.products %}
-      {% render 'product-card'
-        , product: product %}
-    {% endfor %}
-  {% endpaginate %}
+<div class="flex flex-col gap-y-10 my-10">
+  <div class="flex flex-row justify-start gap-x-3">
+    {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+
+    <select
+      name="collection_filter"
+      id="collection_filter"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:text-white">
+      {% for option in collection.sort_options %}
+        <option
+          value="{{ option.value }}"
+          {% if option.value == sort_by %}
+          selected="selected"
+          {% endif %}>
+          {{ option.name }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {% paginate collection.products by 10 %}
+      {% for product in collection.products %}
+        {% render 'product-card'
+          , product: product %}
+      {% endfor %}
+    {% endpaginate %}
+  </div>
 </div>
+
+<script>
+  Shopify.queryParams = {};
+
+  if (location.search.length) {
+    let params = location.search.substr(1).split('&');
+
+    for (let i = 0; i < params.length; i++) {
+      let keyValue = params[i].split('=');
+
+      if (keyValue.length) {
+        Shopify.queryParams[decodeURIComponent(keyValue[0])] = decodeURIComponent(keyValue[1]);
+      }
+    }
+  }
+
+  document.querySelector('#collection_filter').addEventListener('change', function(e) {
+    let value = e.target.value;
+
+    Shopify.queryParams.sort_by = value;
+
+    location.search = new URLSearchParams(Shopify.queryParams).toString();
+  });
+</script>
