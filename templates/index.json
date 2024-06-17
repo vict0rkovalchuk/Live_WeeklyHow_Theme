@@ -2,7 +2,17 @@
   "sections": {
     "hero-section": {
       "type": "hero"
+    },
+    "image-banner-section": {
+      "type": "image-banner"
+    },
+    "featured-collection-section": {
+      "type": "featured-collection"
     }
   },
-  "order": ["hero-section"]
+  "order": [
+    "hero-section",
+    "image-banner-section",
+    "featured-collection-section"
+  ]
 }
