@@ -1,0 +1,46 @@
+{% if section.settings.enable_countdown %}
+  <div class="announcement-bar-container">
+    <div
+      class="countdown"
+      id="countdown"
+      data-date="12-4-2019"
+      data-time="09:00">
+      <div class="day">
+        <span class="num">11</span>
+        <span class="word"></span>
+      </div>
+      <div class="hour">
+        <span class="num">11</span>
+        <span class="word"></span>
+      </div>
+      <div class="min">
+        <span class="num">11</span>
+        <span class="word"></span>
+      </div>
+      <div class="sec">
+        <span class="num">11</span>
+        <span class="word"></span>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Announcement Bar",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_countdown",
+        "default": true,
+        "label": "Display the countdown"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Announcement Bar"
+      }
+    ]
+  }
+{% endschema %}
