@@ -1,0 +1,24 @@
+<div class="max-w-2xl mx-auto my-10">
+  <div class="bg-white shadow-md rounded-lg max-w-sm">
+    <a href="{{ collection.url }}">
+      {% if collection.image %}
+        <img
+          class="rounded-t-lg p-8"
+          src="{{ collection.image | img_url: 'medium' }}"
+          alt="product image">
+      {% else %}
+        {% assign num = index | modulo: 6 %}
+        {% if num < 1 %}
+          {{ 'collection-1' | placeholder_svg_tag: "w-full rounded-t-lg p-8" }}
+        {% else %}
+          {{ num | plus: 1 | prepend: 'collection-' | placeholder_svg_tag: "w-full rounded-t-lg p-8" }}
+        {% endif %}
+      {% endif %}
+    </a>
+    <div class="px-5 pb-5">
+      <a href="{{ collection.url }}">
+        <h3 class="text-gray-900 font-semibold text-xl tracking-tight">{{ collection.title }}</h3>
+      </a>
+    </div>
+  </div>
+</div>
