@@ -1,33 +1,44 @@
 {% if section.settings.enable_countdown %}
   <div class="flex justify-between items-center gap-4 bg-gray-700 p-5 text-white">
-    <div>
-      <span>Hello world</span>
-    </div>
-    <div
-      class="flex gap-x-5 p-4"
-      id="countdown"
-      data-date="25-7-2024"
-      data-time="09:00">
-      <div class="day">
-        <span class="num"></span>
-        <span class="word"></span>
-      </div>
-      <div class="hour">
-        <span class="num"></span>
-        <span class="word"></span>
-      </div>
-      <div class="min">
-        <span class="num"></span>
-        <span class="word"></span>
-      </div>
-      <div class="sec">
-        <span class="num"></span>
-        <span class="word"></span>
-      </div>
-    </div>
-    <div>
-      <a href="#">Button</a>
-    </div>
+
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'text' %}
+          <div>
+            <span>{{ block.settings.announcement_text }}</span>
+          </div>
+        {% when 'countdown' %}
+          <div
+            class="flex gap-x-5 p-4"
+            id="countdown"
+            data-date="{{ block.settings.future_date }}"
+            data-time="{{ block.settings.hours_and_minutes }}">
+            <div class="day flex flex-col items-center">
+              <span class="num text-lg font-bold"></span>
+              <span class="word">days</span>
+            </div>
+            <div class="hour flex flex-col items-center">
+              <span class="num text-lg font-bold"></span>
+              <span class="word">hours</span>
+            </div>
+            <div class="min flex flex-col items-center">
+              <span class="num text-lg font-bold"></span>
+              <span class="word">mins</span>
+            </div>
+            <div class="sec flex flex-col items-center">
+              <span class="num text-lg font-bold"></span>
+              <span class="word">secs</span>
+            </div>
+          </div>
+        {% when 'button' %}
+          {% if block.settings.button_url %}
+            <div>
+              <a class="px-8 py-3 text-lg font-semibold bg-white text-black border rounded border-gray-800" href="{{ block.settings.button_url }}">{{ block.settings.button_text }}</a>
+            </div>
+          {% endif %}
+      {% endcase %}
+    {% endfor %}
+
   </div>
 {% endif %}
 
@@ -35,12 +46,64 @@
   {
     "name": "Announcement Bar",
     "tag": "section",
+    "limit": 1,
     "settings": [
       {
         "type": "checkbox",
         "id": "enable_countdown",
         "default": false,
         "label": "Display the countdown"
+      }
+    ],
+    "max_blocks": 3,
+    "blocks": [
+      {
+        "name": "Text",
+        "type": "text",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "announcement_text",
+            "default": "Your text here",
+            "label": "Announcement text"
+          }
+        ]
+      }, {
+        "name": "Countdown Timer",
+        "type": "countdown",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "future_date",
+            "default": "22-8-2024",
+            "label": "Future day from now",
+            "info": "Formatting is dd-mm-yyyy [e.g: 25-05-2025]"
+          }, {
+            "type": "text",
+            "id": "hours_and_minutes",
+            "default": "10:30",
+            "label": "Hours and minutes",
+            "info": "Formatting is hh:mm [e.g: 10:30]"
+          }
+        ]
+      }, {
+        "name": "Button",
+        "type": "button",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button URL"
+          }, {
+            "type": "text",
+            "id": "button_text",
+            "default": "Button",
+            "label": "Button text"
+          }
+        ]
       }
     ],
     "presets": [
@@ -53,10 +116,6 @@
 
 <script>
   let countdownComponent = new countdown({
-  target: '#countdown',
-  dayWord: ' days',
-  hourWord: ' hours',
-  minWord: ' mins',
-  secWord: ' secs'
+  target: '#countdown'
   });
 </script>

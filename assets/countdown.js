@@ -51,11 +51,6 @@ const countdown = function (_config) {
     0
   ).getTime();
 
-  $(_config.target + ' .day .word').innerHTML = _config.dayWord;
-  $(_config.target + ' .hour .word').innerHTML = _config.hourWord;
-  $(_config.target + ' .min .word').innerHTML = _config.minWord;
-  $(_config.target + ' .sec .word').innerHTML = _config.secWord;
-
   const updateTime = () => {
     // Get todays date and time
     const now = new Date().getTime();

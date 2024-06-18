@@ -9,7 +9,19 @@
       "type": "announcement-bar",
       "settings": {
         "enable_countdown": true
-      }
+      },
+      "blocks": {
+        "text": {
+          "type": "text"
+        },
+        "countdown": {
+          "type": "countdown"
+        },
+        "button": {
+          "type": "button"
+        }
+      },
+      "block_order": ["text", "countdown", "button"]
     }
   },
   "order": ["announcement-bar", "header"]
