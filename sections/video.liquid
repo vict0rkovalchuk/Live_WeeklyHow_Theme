@@ -1,0 +1,81 @@
+<div class="flex flex-col gap-y-5">
+  <div>
+    {% case section.settings.title_size %}
+      {% when 'small' %}
+        {% assign text_size = 'text-sm' %}
+      {% when 'medium' %}
+        {% assign text_size = 'text-lg' %}
+      {% when 'large' %}
+        {% assign text_size = 'text-xl' %}
+    {% endcase %}
+    <h1 class="{{ text_size }}">{{ section.settings.title }}</h1>
+  </div>
+
+  <div class="bg-gray-100 rounded-md w-full mx-auto">
+
+
+    {% if section.settings.shopify_video != null %}
+      <div>
+        {{
+          section.settings.shopify_video | video_tag: image_size: '1100x', autoplay: true, loop: section.settings.video_loop_enable, controls: true, muted: false
+        }}
+      </div>
+    {% else %}
+      {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+    {% endif %}
+  </div>
+
+
+</div>
+
+{% schema %}
+  {
+    "name": "Video",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "default": "Video",
+        "label": "Heading title"
+      },
+      {
+        "type": "select",
+        "id": "title_size",
+        "label": "Title size",
+        "options": [
+          {
+            "label": "Small",
+            "value": "small"
+          }, {
+            "label": "Medium",
+            "value": "medium"
+          }, {
+            "label": "Large",
+            "value": "large"
+          }
+        ],
+        "default": "medium"
+      },
+      {
+        "type": "checkbox",
+        "id": "video_loop_enable",
+        "default": true,
+        "label": "Loop video"
+      },
+      {
+        "type": "header",
+        "content": "Self-hosted Shopify video"
+      }, {
+        "type": "video",
+        "id": "shopify_video",
+        "label": "Video"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Video"
+      }
+    ]
+  }
+{% endschema %}
