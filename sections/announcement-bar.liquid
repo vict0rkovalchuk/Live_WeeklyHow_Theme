@@ -1,26 +1,32 @@
 {% if section.settings.enable_countdown %}
-  <div class="announcement-bar-container">
+  <div class="flex justify-between items-center gap-4 bg-gray-700 p-5 text-white">
+    <div>
+      <span>Hello world</span>
+    </div>
     <div
-      class="countdown"
+      class="flex gap-x-5 p-4"
       id="countdown"
-      data-date="12-4-2019"
+      data-date="25-7-2024"
       data-time="09:00">
       <div class="day">
-        <span class="num">11</span>
+        <span class="num"></span>
         <span class="word"></span>
       </div>
       <div class="hour">
-        <span class="num">11</span>
+        <span class="num"></span>
         <span class="word"></span>
       </div>
       <div class="min">
-        <span class="num">11</span>
+        <span class="num"></span>
         <span class="word"></span>
       </div>
       <div class="sec">
-        <span class="num">11</span>
+        <span class="num"></span>
         <span class="word"></span>
       </div>
+    </div>
+    <div>
+      <a href="#">Button</a>
     </div>
   </div>
 {% endif %}
@@ -33,7 +39,7 @@
       {
         "type": "checkbox",
         "id": "enable_countdown",
-        "default": true,
+        "default": false,
         "label": "Display the countdown"
       }
     ],
@@ -44,3 +50,13 @@
     ]
   }
 {% endschema %}
+
+<script>
+  let countdownComponent = new countdown({
+  target: '#countdown',
+  dayWord: ' days',
+  hourWord: ' hours',
+  minWord: ' mins',
+  secWord: ' secs'
+  });
+</script>

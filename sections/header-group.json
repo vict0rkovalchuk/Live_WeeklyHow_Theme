@@ -6,8 +6,11 @@
       "type": "header"
     },
     "announcement-bar": {
-      "type": "announcement-bar"
+      "type": "announcement-bar",
+      "settings": {
+        "enable_countdown": true
+      }
     }
   },
-  "order": ["header", "announcement-bar"]
+  "order": ["announcement-bar", "header"]
 }
