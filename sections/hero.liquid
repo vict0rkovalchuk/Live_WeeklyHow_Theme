@@ -1,13 +1,21 @@
 <section class="pt-24">
   <div class="px-12 mx-auto max-w-7xl">
+    {% case section.settings.text_aligning %}
+      {% when "left" %}
+        {% assign text_aligning = 'text-left' %}
+      {% when "center" %}
+        {% assign text_aligning = 'text-center' %}
+      {% when "right" %}
+        {% assign text_aligning = 'text-right' %}
+    {% endcase %}
     {% for block in section.blocks %}
       {% case block.type %}
         {% when 'heading-title' %}
-          <h1 class="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center mb-8 text-4xl font-extrabold leading-none tracking-normal text-gray-900 md:text-6xl md:tracking-tight">
+          <h1 class="w-full mx-auto {{ text_aligning }} md:w-11/12 xl:w-9/12 mb-8 text-4xl font-extrabold leading-none tracking-normal text-gray-900 md:text-6xl md:tracking-tight">
             {{ block.settings.hero_heading_title }}
           </h1>
         {% when 'text' %}
-          <p class="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center px-0 mb-8 text-lg text-gray-600 md:text-xl lg:px-24">
+          <p class="w-full mx-auto {{ text_aligning }} md:w-11/12 xl:w-9/12 px-0 mb-8 text-lg text-gray-600 md:text-xl">
             {{ block.settings.hero_text }}
           </p>
         {% when 'image' %}
@@ -32,7 +40,7 @@
             </div>
           </div>
         {% when 'buttons' %}
-          <div class="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center mb-4 space-x-0 md:space-x-2 md:mb-8">
+          <div class="w-full mx-auto {{ text_aligning }} md:w-11/12 xl:w-9/12 mb-4 space-x-0 md:space-x-2 md:mb-8">
             {% if block.settings.hero_primary_button_text and block.settings.hero_primary_button_url %}
               <a href="{{ block.settings.hero_primary_button_url }}" class="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-green-400 rounded-2xl sm:w-auto sm:mb-0">
                 {{ block.settings.hero_primary_button_text }}
@@ -68,6 +76,23 @@
         "label": "Color scheme",
         "info": "Color scheme to apply to the section",
         "default": "scheme-1"
+      }, {
+        "type": "select",
+        "id": "text_aligning",
+        "label": "Align text",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
       }
     ],
     "blocks": [
