@@ -1,7 +1,22 @@
 {
   "sections": {
     "hero-section": {
-      "type": "hero"
+      "type": "hero",
+      "blocks": {
+        "heading-title": {
+          "type": "heading-title"
+        },
+        "text": {
+          "type": "text"
+        },
+        "image": {
+          "type": "image"
+        },
+        "buttons": {
+          "type": "buttons"
+        }
+      },
+      "block_order": ["heading-title", "text", "buttons", "image"]
     },
     "image-banner-section": {
       "type": "image-banner"
