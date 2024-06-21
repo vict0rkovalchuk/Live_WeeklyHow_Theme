@@ -1,0 +1,50 @@
+{% case block.type %}
+  {% when "facebook_link" %}
+    <li>
+      <a
+        href="#"
+        rel="noreferrer"
+        target="_blank"
+        class="text-gray-700 transition hover:opacity-75">
+        <span class="sr-only">Facebook</span>
+
+        {% render 'icon-facebook' %}
+      </a>
+    </li>
+  {% when "instagram_link" %}
+    <li>
+      <a
+        href="#"
+        rel="noreferrer"
+        target="_blank"
+        class="text-gray-700 transition hover:opacity-75">
+        <span class="sr-only">Instagram</span>
+
+        {% render 'icon-instagram' %}
+      </a>
+    </li>
+  {% when "twitter_link" %}
+    <li>
+      <a
+        href="#"
+        rel="noreferrer"
+        target="_blank"
+        class="text-gray-700 transition hover:opacity-75">
+        <span class="sr-only">Twitter</span>
+
+        {% render 'icon-twitter' %}
+      </a>
+    </li>
+  {% when "github_link" %}
+    <li>
+      <a
+        href="#"
+        rel="noreferrer"
+        target="_blank"
+        class="text-gray-700 transition hover:opacity-75">
+        <span class="sr-only">GitHub</span>
+
+        {% render 'icon-github' %}
+      </a>
+    </li>
+{% endcase %}

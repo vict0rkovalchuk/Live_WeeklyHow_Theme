@@ -28,8 +28,8 @@
 
   <body>
     {% comment %} {% for schema in settings.color_schemes %}
-                                          {{ schema.settings.shadow }}
-                            {% endfor %} {% endcomment %}
+                                                {{ schema.settings.shadow }}
+                                {% endfor %} {% endcomment %}
     {% sections 'header-group' %}
     <main
       id="MainContent"
@@ -38,5 +38,6 @@
       {{ content_for_layout }}
     </main>
     {{ 'header.js' | asset_url | script_tag }}
+    {% section 'footer' %}
   </body>
 </html>

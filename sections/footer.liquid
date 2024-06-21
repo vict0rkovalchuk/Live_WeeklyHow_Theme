@@ -1,0 +1,204 @@
+<footer class="bg-white">
+  <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="lg:flex lg:items-start lg:gap-8">
+      <div class="text-teal-600">
+        {% if section.settings.logo %}
+          {{ section.settings.logo | image_url: width: '100px' | image_tag }}
+        {% else %}
+          <img
+            class="h-8 w-auto"
+            src="{{ 'shrek-logo.png' | asset_img_url }}"
+            alt="">
+        {% endif %}
+      </div>
+
+      <div class="mt-8 grid grid-cols-2 gap-8 lg:mt-0 lg:grid-cols-5 lg:gap-y-16">
+        <div class="col-span-2">
+          <div>
+            <h2 class="text-2xl font-bold text-gray-900">{{ section.settings.footer_title }}</h2>
+
+            <p class="mt-4 text-gray-500">
+              {{ section.settings.footer_text }}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-span-2 lg:col-span-3 lg:flex lg:items-end">
+
+          {% form 'customer'
+            , class: "w-full" %}
+            {% if form.errors %}
+              <div class="bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md my-4" role="alert">
+                <div class="flex">
+                  <div class="py-1">
+                    <svg
+                      class="fill-current h-6 w-6 text-red-500 mr-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" /></svg>
+                  </div>
+                  <div>
+                    <p class="font-bold">Error!</p>
+                    <p class="text-sm">Email {{ form.errors.messages.email }}</p>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            <label for="UserEmail" class="sr-only">
+              Email
+            </label>
+
+            <div class="border border-gray-100 p-2 focus-within:ring sm:flex sm:items-center sm:gap-4">
+              <input
+                type="email"
+                id="UserEmail"
+                placeholder="john@rhcp.com"
+                name="contact[email]"
+                class="w-full border-none focus:outline-none focus:border-transparent focus:ring-transparent sm:text-sm" />
+
+              <button class="mt-1 w-full bg-teal-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-teal-600 sm:mt-0 sm:w-auto sm:shrink-0">
+                Sign Up
+              </button>
+            </div>
+          {% endform %}
+
+        </div>
+
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'footer_links' %}
+              <div class="col-span-2 sm:col-span-1">
+                <p class="font-medium text-gray-900">{{ block.settings.footer_links.title }}</p>
+
+                <ul class="mt-6 space-y-4 text-sm">
+                  {% for link in block.settings.footer_links.links %}
+                    <li>
+                      <a href="{{ link.url }}" class="text-gray-700 transition hover:opacity-75">
+                        {{ link.title }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+          {% endcase %}
+        {% endfor %}
+
+        <ul class="col-span-2 flex justify-start gap-6 lg:col-span-5 lg:justify-end">
+          {% for block in section.blocks %}
+            {% render 'social-platforms'
+              , block: block %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-8 border-t border-gray-100 pt-8">
+      <div class="sm:flex sm:justify-between">
+        <p class="text-xs text-gray-500">&copy; 2022. Company Name. All rights reserved.</p>
+
+        <ul class="mt-8 flex flex-wrap justify-start gap-4 text-xs sm:mt-0 lg:justify-end">
+          <li>
+            <a href="#" class="text-gray-500 transition hover:opacity-75">
+              Terms & Conditions
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="text-gray-500 transition hover:opacity-75">
+              Privacy Policy
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="text-gray-500 transition hover:opacity-75">
+              Cookies
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      }, {
+        "type": "text",
+        "id": "footer_title",
+        "default": "Get the latest news!",
+        "label": "Title"
+      }, {
+        "type": "text",
+        "id": "footer_text",
+        "default": " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse non cupiditate quae nam molestias.",
+        "label": "Subtitle"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Links List",
+        "type": "footer_links",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "footer_links",
+            "label": "Links List",
+            "default": "footer"
+          }
+        ]
+      },
+      {
+        "type": "facebook_link",
+        "name": "Facebook",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "url",
+            "id": "facebook_url",
+            "label": "Facebook URL"
+          }
+        ]
+      },
+      {
+        "type": "instagram_link",
+        "name": "Instagram",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "url",
+            "id": "instagram_url",
+            "label": "Instagram URL"
+          }
+        ]
+      },
+      {
+        "type": "twitter_link",
+        "name": "Twitter",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "url",
+            "id": "twitter_url",
+            "label": "Twitter URL"
+          }
+        ]
+      }, {
+        "type": "github_link",
+        "name": "Github",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "url",
+            "id": "github_url",
+            "label": "Github URL"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
