@@ -1,0 +1,30 @@
+<article class="max-w-2xl px-6 py-24 mx-auto space-y-12 text-gray-900">
+  {% if article.image %}
+    <div>
+      <img src="{{ article.image | image_url }}" alt="{{ article.title }}">
+    </div>
+  {% else %}
+    {{ "blog-apparel-1" | placeholder_svg_tag: "block mx-auto" }}
+  {% endif %}
+  <div class="w-full mx-auto space-y-4 text-center">
+    <p class="text-xs font-semibold tracking-wider uppercase">
+      {% for tag in article.tags %}
+        {{ tag | prepend: '#' }}
+      {% endfor %}
+    </p>
+    <h1 class="text-4xl font-bold leading-tight md:text-5xl">{{ article.title }}</h1>
+    <p class="text-sm text-gray-600">by
+      <a
+        rel="noopener noreferrer"
+        href="#"
+        target="_blank"
+        class="underline text-violet-600">
+        <span itemprop="name">{{ article.author }}</span>
+      </a>
+      <time datetime="{{ article.created_at }}">{{ article.created_at | date: format: "on_date" }}</time>
+    </p>
+  </div>
+  <div class="text-gray-800">
+    {{ article.content }}
+  </div>
+</article>
